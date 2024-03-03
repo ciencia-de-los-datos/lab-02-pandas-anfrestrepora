@@ -63,11 +63,11 @@ def pregunta_03():
     """
 
     df = pd.read_csv('tbl0.tsv', sep='\t')
-
     # Contar la cantidad de registros por cada letra en la columna _c1
     conteo_por_letra = df['_c1'].value_counts()
-
-    return conteo_por_letra
+    conteo_por_letra_sorted = conteo_por_letra.sort_index()
+    print(type(conteo_por_letra_sorted))
+    return conteo_por_letra_sorted
 
 
 def pregunta_04():
@@ -243,9 +243,11 @@ def pregunta_11():
     39   39    a,d,f
     """
     df = pd.read_csv('tbl1.tsv', sep='\t')
+  
+    df_sorted = df.sort_values(by=['_c0', '_c4'], ascending=[True, True])
 
     # Agrupar los valores de la columna _c4 por los valores únicos de la columna _c0
-    grouped = df.groupby('_c0')['_c4'].apply(lambda x: ','.join(map(str, x))).reset_index()
+    grouped = df_sorted.groupby('_c0')['_c4'].apply(lambda x: ','.join(map(str, x))).reset_index()
 
 
 
