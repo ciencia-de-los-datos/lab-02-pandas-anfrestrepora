@@ -217,6 +217,7 @@ def pregunta_10():
     """
 
     df = pd.read_csv('tbl0.tsv', sep='\t')
+    
     df_sorted = df.sort_values(by=['_c1', '_c2'], ascending=[True, True])
 
 # Agrupar los valores de la columna _c2 por los valores únicos de la columna _c1
