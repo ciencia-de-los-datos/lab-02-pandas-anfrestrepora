@@ -223,6 +223,7 @@ def pregunta_10():
 
 # Agrupar los valores de la columna _c2 por los valores únicos de la columna _c1
     grouped = df_sorted.groupby('_c1')['_c2'].apply(lambda x: ':'.join(map(str, x))).reset_index()
+    grouped.rename(columns={"_c1":"_c0","_c2":"_c1"}, inplace=True)
 
 
     return grouped
@@ -325,7 +326,8 @@ def pregunta_13():
 # print(pregunta_07())
 # print(pregunta_08())
 # print(pregunta_09())
-# print(pregunta_10())
+#print(pregunta_10())
 # print(pregunta_11())
-# print(pregunta_12())
-# print(pregunta_13())
+#print(pregunta_12())
+#print(pregunta_13())
+
