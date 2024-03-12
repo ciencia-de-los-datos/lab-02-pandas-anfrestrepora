@@ -207,8 +207,8 @@ def pregunta_10():
     la columna _c2 para el archivo `tbl0.tsv`.
 
     Rta/
-                                   _c1
-      _c0
+                                   _c2
+      _c1
     0   A              1:1:2:3:6:7:8:9
     1   B                1:3:4:5:6:8:9
     2   C                    0:5:6:7:9
@@ -223,7 +223,9 @@ def pregunta_10():
 
 # Agrupar los valores de la columna _c2 por los valores únicos de la columna _c1
     grouped = df_sorted.groupby('_c1')['_c2'].apply(lambda x: ':'.join(map(str, x))).reset_index()
-    grouped.rename(columns={"_c1":"_c0","_c2":"_c1"}, inplace=True)
+    grouped.set_index('_c1', inplace=True)
+
+
 
 
     return grouped
@@ -281,10 +283,11 @@ def pregunta_12():
     df_sorted['_c5b'] = df_sorted['_c5b'].astype(str)
 
     # Ordenar alfabéticamente los valores de la columna _c5a y _c5b
-    df_sorted['_c5'] = df_sorted.apply(lambda row: ','.join([row['_c5a'], row['_c5b']]), axis=1)
+    df_sorted['_c5'] = df_sorted.apply(lambda row: ':'.join([row['_c5a'], row['_c5b']]), axis=1)
 
     # Agrupar los valores de la columna _c5 por los valores únicos de la columna _c0
     grouped = df_sorted.groupby('_c0')['_c5'].apply(lambda x: ','.join(map(str, x))).reset_index()
+
 
 
     return grouped
@@ -317,6 +320,22 @@ def pregunta_13():
 
     return suma_por_c1
 
+def ejemplo():
+    a=pd.DataFrame(
+            {
+                "_c2": [
+                    "1:1:2:3:6:7:8:9",
+                    "1:3:4:5:6:8:9",
+                    "0:5:6:7:9",
+                    "1:2:3:5:5:7",
+                    "1:1:2:3:3:4:5:5:5:6:7:8:8:9",
+                ]
+            },
+            index=pd.Series(["A", "B", "C", "D", "E"], name="_c1"),
+        )
+
+    return a
+
 # print(pregunta_01())
 # print(pregunta_02())
 # print(pregunta_03())
@@ -327,6 +346,7 @@ def pregunta_13():
 # print(pregunta_08())
 # print(pregunta_09())
 #print(pregunta_10())
+#print(ejemplo())
 # print(pregunta_11())
 #print(pregunta_12())
 #print(pregunta_13())
